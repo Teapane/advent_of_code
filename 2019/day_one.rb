@@ -1,6 +1,6 @@
 def calculate_fuel_cost(file)
   opened_file = open_file(file)
-    opened_file.each.with_object([]) do |line, arr|
+  opened_file.each.with_object([]) do |line, arr|
     arr << (line / 3) - 2
   end.inject(:+)
 end
