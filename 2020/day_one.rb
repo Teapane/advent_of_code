@@ -20,5 +20,5 @@ def open_file(file)
   File.open(file, 'r').map(&:to_i)
 end
 
-puts two_sum('2020/day_one_input.txt', 2020)
-puts three_sum('2020/day_one_input.txt', 2020)
+puts two_sum('2020/day_one_input.txt', 2020) # => 964875
+puts three_sum('2020/day_one_input.txt', 2020) # => 158661360
