@@ -1,28 +1,25 @@
-require 'pry'
-
 def fix_passwords(file)
-  hash = generate_hash_map(file)
+  file = generate_file(file)
   keep_count = []
-  hash.each do |password_rules,password|
-    min, max = password_rules.split('-').map(&:to_i)
-    policy = password_rules.split(' ').last
-
-    count = password.chars.count { |char| char == policy }
+  discard = []
+  file.each do |line|
+    min, max = line.split('-').map(&:to_i)
+    policy, password = line.split(':').map(&:strip)
+    policy_chars = policy.split(' ').last
+    count = password.chars.count { |char| char == policy_chars }
     keep = (min..max).cover?(count)
-    puts keep if keep == true
     if keep == true
       keep_count << password
+    else
+      discard << password
     end
   end
-  keep_count.size
+  puts discard.size
+  puts keep_count.size
 end
 
-def generate_hash_map(file)
-  File.open(file, 'r').each_line.with_object({}) do |line, hash|
-    arr = line.split(":").map(&:strip)
-    hash[arr[0]] = arr[1]
-    hash
-  end
+def generate_file(file)
+  File.open(file, 'r')
 end
 
 puts fix_passwords('2020/day_two_input.txt')
