@@ -12,4 +12,5 @@ def open_file(file)
 end
 
 puts expense_report('2020/day_one_input.txt', 2, 2020) # => 964875
-puts expense_report('2020/day_one_input.txt', 3, 2020) # => 158661360
+puts expense_report('2020/day_one_input.txt', 2, 2020) # => 964875
+puts expense_report_each_cons('2020/day_one_input.txt', 3, 2020) # => 158661360

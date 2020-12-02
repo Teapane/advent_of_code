@@ -1,2 +1,3 @@
 def opscode(file)
+
 end
