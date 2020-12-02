@@ -1,4 +1,3 @@
-require 'pry'
 def fix_passwords(file)
   file = generate_file(file)
   keep_count = []
@@ -39,6 +38,6 @@ def generate_file(file)
   File.open(file, 'r')
 end
 
-# puts fix_passwords('2020/day_two_input.txt')
-# puts fix_passwords('2020/day_two_input.txt')
+puts fix_passwords('2020/day_two_input.txt')
+puts fix_passwords('2020/day_two_input.txt')
 puts one_good_password('2020/day_two_input.txt')
