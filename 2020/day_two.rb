@@ -25,8 +25,8 @@ def one_good_password(file)
     counts = parts[0]
     letter = parts[1].gsub(':', '')
     password = parts[2]
-    counts.split('-').each do |x|
-      if password[x.to_i - 1] == letter
+    counts.split('-').each do |x, y|
+      if password[x.to_i - 1] == letter && password[y.to_i]
         arr << password
       end
     end
