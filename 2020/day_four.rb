@@ -8,40 +8,43 @@
 # cid (Country ID) #can be nil
 require 'pry'
 
-ATTRS = [
-  :byr,
-  :iyr,
-  :eyr,
-  :hgt,
-  :hcl,
-  :ecl,
-  :pid
-]
+ATTRS = %w(
+  byr
+  iyr
+  eyr
+  hgt
+  hcl
+  ecl
+  pid
+)
 
 def passport_validator(input)
   parsed = parse_file(input)
+  valid = []
+  invalid = []
   parsed.each do |x|
-    unless x == ["\n"]
-      validate(x)
+    portions = sanitize_input(x)
+    arr = []
+    portions.map do |data|
+      key, _ = data.split(":")
+      arr << key
+    end
+    if ATTRS.all? { |z| arr.include?(z) }
+      valid << x
+    else
+      invalid << x
     end
   end
+  valid.size
 end
 
-def validate(arr)
-  new_arr = []
-  rejected = []
-  arr.each do |y|
-    binding.pry
-    if y.include(ATTRS)
-      new_arr << y
-    else
-      rejected << y
-    end
-  end
+def sanitize_input(string)
+  parsed = string.sub(/\n/, " ")
+  parsed.split(" ")
 end
 
 def parse_file(file)
-  File.open(file, 'r').each_line.map{ |x| x.split(/\n\n/) }
+  File.read(File.open(file, 'r')).split(/\n\n/)
 end
 
 puts passport_validator('2020/day_four_input.txt')
